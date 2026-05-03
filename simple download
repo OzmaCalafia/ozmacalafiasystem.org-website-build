@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Protocol Interface</title>
+    <style>
+        /* System Resets */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #0a0a0a;
+            font-family: monospace;
+            overflow: hidden;
+        }
+
+        /* State Container Architecture */
+        .view-state {
+            display: none;
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Active State Modifier */
+        .view-state.active {
+            display: flex;
+        }
+
+        /* Image Definitions */
+        #state-initiation {
+            background-image: url('image_1.jpg'); /* Define Initial Image */
+        }
+
+        #state-completion {
+            background-image: url('image_2.jpg'); /* Define Completion Image */
+        }
+
+        /* Interface Component */
+        .action-button {
+            background-color: rgba(10, 10, 10, 0.85);
+            color: #e0e0e0;
+            border: 1px solid #333333;
+            padding: 20px 40px;
+            font-size: 16px;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10; /* Ensures button remains above background */
+        }
+
+        .action-button:hover {
+            background-color: #e0e0e0;
+            color: #0a0a0a;
+            border-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="state-initiation" class="view-state active">
+        <button id="btn-download" class="action-button">Execute Download Protocol</button>
+    </div>
+
+    <div id="state-completion" class="view-state">
+        </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadButton = document.getElementById('btn-download');
+            const stateInitiation = document.getElementById('state-initiation');
+            const stateCompletion = document.getElementById('state-completion');
+
+            // Define target asset
+            const targetFile = 'target_document.pdf'; 
+
+            downloadButton.addEventListener('click', () => {
+                // 1. Execute Download Mechanism
+                const link = document.createElement('a');
+                link.href = targetFile;
+                link.download = targetFile; // Forces download behavior instead of opening in tab
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // 2. Execute State Transition
+                stateInitiation.classList.remove('active');
+                stateCompletion.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
