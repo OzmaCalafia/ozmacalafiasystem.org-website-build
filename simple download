@@ -83,7 +83,7 @@
             const stateCompletion = document.getElementById('state-completion');
 
             // Define target asset
-            const targetFile = 'target_document.pdf'; 
+            const targetFile = 'The [SYSTEM] Archive.pdf'; 
 
             downloadButton.addEventListener('click', () => {
                 // 1. Execute Download Mechanism
