@@ -38,11 +38,11 @@
 
         /* Image Definitions */
         #state-initiation {
-            background-image: url('image_1.jpg'); /* Define Initial Image */
+            background-image: url('a4-front-cover.pdf'); /* Define Initial Image */
         }
 
         #state-completion {
-            background-image: url('image_2.jpg'); /* Define Completion Image */
+            background-image: url('a4-back-cover.pdf'); /* Define Completion Image */
         }
 
         /* Interface Component */
