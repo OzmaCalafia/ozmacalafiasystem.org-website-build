@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Interface</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --ui-bg: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --accent: #ffffff;
+            --border: #333333;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* Navigation / Control Panel */
+        #control-panel {
+            background-color: var(--ui-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            z-index: 100;
+        }
+        button {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+        button:hover:not(:disabled) {
+            background-color: var(--text-primary);
+            color: var(--bg-color);
+        }
+        button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        /* Main Viewport */
+        #viewport {
+            flex-grow: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        /* Page Display */
+        #book-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px; /* Adjust based on your PDF aspect ratio */
+        }
+        #page-image {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            display: block;
+        }
+        /* [TOPOLOGY INTERFACE] Overlay for Page 4 */
+        #topology-interface {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid var(--border);
+            padding: 30px;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+        .topology-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        /* Content Modules (Downloads / About) */
+        .content-module {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--ui-bg);
+            border: 1px solid var(--border);
+            padding: 40px;
+        }
+        h2 { margin-top: 0; text-transform: uppercase; letter-spacing: 2px; }
+        .download-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="control-panel">
+        <button id="btn-prev" onclick="navigatePage(-1)">&#9664; Previous</button>
+        <button id="btn-next" onclick="navigatePage(1)">Next &#9654;</button>
+        <button onclick="goToPage(4)">[TOPOLOGY INTERFACE]</button>
+        <button onclick="setView('downloads')">[DOWNLOAD PORTAL]</button>
+        <button onclick="setView('about')">ABOUT</button>
+    </div>
+
+    <div id="viewport">
+        <div id="book-container" class="view-state">
+            <img id="page-image" src="page_1.jpg" alt="Page Image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'1000\'><rect width=\'100%\' height=\'100%\' fill=\'%231a1a1a\'/><text x=\'50%\' y=\'50%\' fill=\'%23fff\' font-family=\'monospace\' font-size=\'20\' text-anchor=\'middle\'>Missing Image: page_X.jpg</text></svg>'">
+            
+            <div id="topology-interface">
+                <h2>[TOPOLOGY INTERFACE]</h2>
+                <div class="topology-grid">
+                    <button onclick="goToPage(5)">Chapter 1: Initiation</button>
+                    <button onclick="goToPage(10)">Chapter 1: Section B</button>
+                    <button onclick="goToPage(15)">Chapter 2: Framework</button>
+                    <button onclick="goToPage(20)">Chapter 2: Section B</button>
+                    <button onclick="goToPage(24)">Chapter 3: Dynamics</button>
+                    <button onclick="goToPage(27)">Chapter 4: Conclusion</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="downloads-container" class="content-module view-state">
+            <h2>[DOWNLOAD PORTAL]</h2>
+            <p>Select required format specification:</p>
+            <div class="download-list">
+                <button onclick="window.location.href='book.pdf'">Download PDF</button>
+                <button onclick="window.location.href='book.epub'">Download EPUB</button>
+                <button onclick="window.location.href='book.mobi'">Download MOBI</button>
+            </div>
+            <button style="margin-top: 30px;" onclick="setView('book')">Return to Protocol</button>
+        </div>
+
+        <div id="about-container" class="content-module view-state">
+            <h2>System / Author Overview</h2>
+            <p>Enter author biography and creation parameters here.</p>
+            <p>This text dictates the foundational intent of the compiled document.</p>
+            <button style="margin-top: 30px;" onclick="setView('book')">Return to Protocol</button>
+        </div>
+    </div>
+
+    <script>
+        const TOTAL_PAGES = 29;
+        let currentPage = 1;
+
+        // Initialize state
+        window.onload = () => {
+            renderPage();
+            updateControls();
+        };
+
+        // Navigation logic
+        function navigatePage(direction) {
+            let newPage = currentPage + direction;
+            if (newPage >= 1 && newPage <= TOTAL_PAGES) {
+                currentPage = newPage;
+                setView('book');
+            }
+        }
+
+        // Direct page access
+        function goToPage(pageNum) {
+            if (pageNum >= 1 && pageNum <= TOTAL_PAGES) {
+                currentPage = pageNum;
+                setView('book');
+            }
+        }
+
+        // View router
+        function setView(viewMode) {
+            // Hide all modules
+            document.getElementById('book-container').style.display = 'none';
+            document.getElementById('downloads-container').style.display = 'none';
+            document.getElementById('about-container').style.display = 'none';
+
+            // Reset Topology overlay
+            document.getElementById('topology-interface').style.display = 'none';
+
+            if (viewMode === 'book') {
+                document.getElementById('book-container').style.display = 'flex';
+                renderPage();
+            } else if (viewMode === 'downloads') {
+                document.getElementById('downloads-container').style.display = 'block';
+            } else if (viewMode === 'about') {
+                document.getElementById('about-container').style.display = 'block';
+            }
+            updateControls();
+        }
+
+        // Image renderer and Page 4 logic
+        function renderPage() {
+            const imgElement = document.getElementById('page-image');
+            imgElement.src = `page_${currentPage}.jpg`; // Requires local images
+
+            // Execute [TOPOLOGY INTERFACE] overlay if Page 4
+            if (currentPage === 4) {
+                document.getElementById('topology-interface').style.display = 'block';
+            }
+        }
+
+        // Button state manager
+        function updateControls() {
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            
+            // Disable logic bounds
+            btnPrev.disabled = (currentPage === 1);
+            btnNext.disabled = (currentPage === TOTAL_PAGES);
+        }
+    </script>
+</body>
+</html>
