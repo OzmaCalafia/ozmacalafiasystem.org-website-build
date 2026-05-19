@@ -430,18 +430,30 @@
                     currentExplorePage = requestedPage;
                     document.getElementById('explore-image').src = `page_${currentExplorePage}.jpg`;
                 }
-                setView('explore', false);
-            } else if (hash && hash !== '#') {
-                const validViews = ['home', 'about', 'legal'];
-                const targetView = hash.replace('#', '');
-                if (validViews.includes(targetView)) {
-                    setView(targetView, false);
-                } else {
-                    setView('home', false);
-                }
-            } else {
-                setView('home', false);
+                // --- View Routing ---
+        function setView(viewId, pushHistory = true) {
+            document.querySelectorAll('.view-state').forEach(el => el.classList.remove('active'));
+            document.getElementById('view-' + viewId).classList.add('active');
+            
+            // 1. Reset Home Protocol
+            if (viewId === 'home') {
+                document.getElementById('state-initiation').classList.add('active');
+                document.getElementById('state-completion').classList.remove('active');
+                downloadInitiated = false; // Allows the download to trigger again
             }
+
+            // 2. Initialize Explore Protocol
+            if (viewId === 'explore') {
+                updateExploreControls();
+                preloadImage(currentExplorePage + 1); 
+            }
+
+            // 3. Update URL State
+            if (pushHistory) {
+                const hash = viewId === 'explore' ? `#explore-${currentExplorePage}` : `#${viewId}`;
+                history.pushState({ view: viewId, page: currentExplorePage }, '', hash);
+            }
+        }
         }
     </script>
 </body>
