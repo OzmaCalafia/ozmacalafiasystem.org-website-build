@@ -1,0 +1,113 @@
+
+      <svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          
+      @keyframes fadeOutAnim { 
+        0%, 3.539720374427709% { opacity: 0; } 
+        3.5497203744277086%, 96.46027962557228% { opacity: 1; } 
+        100%, 100% { opacity: 0; } 
+      }
+      .sigil-anim-container { animation: fadeOutAnim 14.12540955529117s linear infinite; }
+      @keyframes drawCircleAnim {
+        0%, 3.539720374427709% { stroke-dashoffset: 2390; }
+        24.668403470149695% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: 0; }
+      }
+      .circle-path {
+        stroke-dasharray: 2390;
+        stroke-dashoffset: 2390;
+        animation: drawCircleAnim 14.12540955529117s linear infinite;
+      }
+      
+          @keyframes drawSegAnim0 {
+            0%, 24.668403470149695% { stroke-dashoffset: 661; }
+            30.49283022659044%, 100% { stroke-dashoffset: 0; }
+          }
+          .seg-path-0 {
+            stroke-dasharray: 661;
+            stroke-dashoffset: 661;
+            animation: drawSegAnim0 14.12540955529117s linear infinite;
+          }
+        
+          @keyframes drawSegAnim1 {
+            0%, 30.49283022659044% { stroke-dashoffset: 763; }
+            37.21829893800309%, 100% { stroke-dashoffset: 0; }
+          }
+          .seg-path-1 {
+            stroke-dasharray: 763;
+            stroke-dashoffset: 763;
+            animation: drawSegAnim1 14.12540955529117s linear infinite;
+          }
+        
+          @keyframes drawSegAnim2 {
+            0%, 37.21829893800309% { stroke-dashoffset: 661; }
+            43.04272569444383%, 100% { stroke-dashoffset: 0; }
+          }
+          .seg-path-2 {
+            stroke-dasharray: 661;
+            stroke-dashoffset: 661;
+            animation: drawSegAnim2 14.12540955529117s linear infinite;
+          }
+        
+          @keyframes drawSegAnim3 {
+            0%, 43.04272569444383% { stroke-dashoffset: 661; }
+            48.867152450884575%, 100% { stroke-dashoffset: 0; }
+          }
+          .seg-path-3 {
+            stroke-dasharray: 661;
+            stroke-dashoffset: 661;
+            animation: drawSegAnim3 14.12540955529117s linear infinite;
+          }
+        
+          @keyframes drawSegAnim4 {
+            0%, 48.867152450884575% { stroke-dashoffset: 762; }
+            55.59262116229723%, 100% { stroke-dashoffset: 0; }
+          }
+          .seg-path-4 {
+            stroke-dasharray: 762;
+            stroke-dashoffset: 762;
+            animation: drawSegAnim4 14.12540955529117s linear infinite;
+          }
+        
+          @keyframes drawSegAnim5 {
+            0%, 55.59262116229723% { stroke-dashoffset: 661; }
+            61.41704791873798%, 100% { stroke-dashoffset: 0; }
+          }
+          .seg-path-5 {
+            stroke-dasharray: 661;
+            stroke-dashoffset: 661;
+            animation: drawSegAnim5 14.12540955529117s linear infinite;
+          }
+        
+          @keyframes drawSegAnim6 {
+            0%, 61.41704791873798% { stroke-dashoffset: 762; }
+            68.14251663015062%, 100% { stroke-dashoffset: 0; }
+          }
+          .seg-path-6 {
+            stroke-dasharray: 762;
+            stroke-dashoffset: 762;
+            animation: drawSegAnim6 14.12540955529117s linear infinite;
+          }
+        
+    
+        </style>
+        <g class="sigil-anim-container">
+          <path d="M 400 20 A 380 380 0 1 0 400 780 A 380 380 0 1 0 400 20" fill="none" stroke="#000000" stroke-width="24" class="circle-path" stroke-linecap="round" />
+          
+      <path d="M 399.99999999999994 20 L 70.91034656191329 590" fill="none" stroke="#000000" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" class="seg-path-0" />
+    
+      <path d="M 70.91034656191329 590 L 729.0896534380868 210.00000000000003" fill="none" stroke="#000000" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" class="seg-path-1" />
+    
+      <path d="M 729.0896534380868 210.00000000000003 L 400 780" fill="none" stroke="#000000" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" class="seg-path-2" />
+    
+      <path d="M 400 780 L 70.91034656191334 209.99999999999997" fill="none" stroke="#000000" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" class="seg-path-3" />
+    
+      <path d="M 70.91034656191334 209.99999999999997 L 729.0896534380868 590" fill="none" stroke="#000000" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" class="seg-path-4" />
+    
+      <path d="M 729.0896534380868 590 L 399.99999999999994 20" fill="none" stroke="#000000" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" class="seg-path-5" />
+    
+      <path d="M 399.99999999999994 20 L 400 780" fill="none" stroke="#000000" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" class="seg-path-6" />
+    
+        </g>
+      </svg>
+    
