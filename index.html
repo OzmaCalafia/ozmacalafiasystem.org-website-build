@@ -331,6 +331,7 @@
 
     <!-- Core Logic -->
     <script>
+      
         // System Variables
         const TOTAL_EXPLORE_PAGES = 27;
         let currentExplorePage = 1;
@@ -339,13 +340,9 @@
 
         // --- Initialization & Deep Linking ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Check URL hash for direct links (e.g., #explore-14)
             handleUrlState();
-            
-            // Listen for browser back/forward buttons
             window.addEventListener('popstate', handleUrlState);
             
-            // Keyboard Navigation (Left/Right Arrows)
             document.addEventListener('keydown', (e) => {
                 if (document.getElementById('view-explore').classList.contains('active')) {
                     if (e.key === 'ArrowRight') navigateExplore(1);
@@ -353,27 +350,29 @@
                 }
             });
 
-          // State Transition Protocol Logic
+            // State Transition Protocol Logic
             const downloadButton = document.getElementById('btn-download');
             const stateInitiation = document.getElementById('state-initiation');
             const stateCompletion = document.getElementById('state-completion');
 
-            downloadButton.addEventListener('click', () => {
-                if(downloadInitiated) return; 
-                
-                // 1. Execute File Download
-                const link = document.createElement('a');
-                link.href = targetDocument;
-                link.download = targetDocument;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+            if (downloadButton) {
+                downloadButton.addEventListener('click', () => {
+                    if(downloadInitiated) return; 
+                    
+                    // 1. Execute File Download
+                    const link = document.createElement('a');
+                    link.href = targetDocument;
+                    link.download = targetDocument;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
 
-                // 2. Execute Background State Transition Protocol
-                stateInitiation.classList.remove('active');
-                stateCompletion.classList.add('active');
-                downloadInitiated = true;
-            });
+                    // 2. Execute Background State Transition Protocol
+                    stateInitiation.classList.remove('active');
+                    stateCompletion.classList.add('active');
+                    downloadInitiated = true;
+                });
+            }
         });
 
         // --- View Routing ---
@@ -381,67 +380,15 @@
             document.querySelectorAll('.view-state').forEach(el => el.classList.remove('active'));
             document.getElementById('view-' + viewId).classList.add('active');
             
-            if (viewId === 'explore') {
-                updateExploreControls();
-                preloadImage(currentExplorePage + 1); // Preload next page
-            }
-
-            // Update URL cleanly without reloading
-            if (pushHistory) {
-                const hash = viewId === 'explore' ? `#explore-${currentExplorePage}` : `#${viewId}`;
-                history.pushState({ view: viewId, page: currentExplorePage }, '', hash);
-            }
-        }
-
-        // --- Explore Logic & Preloading ---
-        function navigateExplore(direction) {
-            const newPage = currentExplorePage + direction;
-            if (newPage >= 1 && newPage <= TOTAL_EXPLORE_PAGES) {
-                currentExplorePage = newPage;
-                document.getElementById('explore-image').src = `page_${currentExplorePage}.jpg`;
-                updateExploreControls();
-                
-                // Update URL to match current page
-                history.pushState({ view: 'explore', page: currentExplorePage }, '', `#explore-${currentExplorePage}`);
-                
-                // Preload the next logical image based on reading direction
-                preloadImage(currentExplorePage + direction);
-            }
-        }
-
-        function updateExploreControls() {
-            const btnPrev = document.getElementById('btn-prev');
-            const btnNext = document.getElementById('btn-next');
-            btnPrev.style.display = (currentExplorePage === 1) ? 'none' : 'inline-block';
-            btnNext.style.display = (currentExplorePage === TOTAL_EXPLORE_PAGES) ? 'none' : 'inline-block';
-        }
-
-        function preloadImage(pageNum) {
-            if (pageNum >= 1 && pageNum <= TOTAL_EXPLORE_PAGES) {
-                const img = new Image();
-                img.src = `page_${pageNum}.jpg`;
-            }
-        }
-
-        function handleUrlState() {
-            const hash = window.location.hash;
-            if (hash.startsWith('#explore-')) {
-                const requestedPage = parseInt(hash.replace('#explore-', ''));
-                if (requestedPage >= 1 && requestedPage <= TOTAL_EXPLORE_PAGES) {
-                    currentExplorePage = requestedPage;
-                    document.getElementById('explore-image').src = `page_${currentExplorePage}.jpg`;
-                }
-        
-        // --- View Routing ---
-        function setView(viewId, pushHistory = true) {
-            document.querySelectorAll('.view-state').forEach(el => el.classList.remove('active'));
-            document.getElementById('view-' + viewId).classList.add('active');
-            
             // 1. Reset Home Protocol
             if (viewId === 'home') {
-                document.getElementById('state-initiation').classList.add('active');
-                document.getElementById('state-completion').classList.remove('active');
-                downloadInitiated = false; // Allows the download to trigger again
+                const stateInit = document.getElementById('state-initiation');
+                const stateComp = document.getElementById('state-completion');
+                if (stateInit && stateComp) {
+                    stateInit.classList.add('active');
+                    stateComp.classList.remove('active');
+                    downloadInitiated = false; 
+                }
             }
 
             // 2. Initialize Explore Protocol
@@ -462,7 +409,8 @@
             const newPage = currentExplorePage + direction;
             if (newPage >= 1 && newPage <= TOTAL_EXPLORE_PAGES) {
                 currentExplorePage = newPage;
-                document.getElementById('explore-image').src = `page_${currentExplorePage}.jpg`;
+                const exploreImg = document.getElementById('explore-image');
+                if(exploreImg) exploreImg.src = `page_${currentExplorePage}.jpg`;
                 updateExploreControls();
                 
                 history.pushState({ view: 'explore', page: currentExplorePage }, '', `#explore-${currentExplorePage}`);
@@ -473,8 +421,8 @@
         function updateExploreControls() {
             const btnPrev = document.getElementById('btn-prev');
             const btnNext = document.getElementById('btn-next');
-            btnPrev.style.display = (currentExplorePage === 1) ? 'none' : 'inline-block';
-            btnNext.style.display = (currentExplorePage === TOTAL_EXPLORE_PAGES) ? 'none' : 'inline-block';
+            if (btnPrev) btnPrev.style.display = (currentExplorePage === 1) ? 'none' : 'inline-block';
+            if (btnNext) btnNext.style.display = (currentExplorePage === TOTAL_EXPLORE_PAGES) ? 'none' : 'inline-block';
         }
 
         function preloadImage(pageNum) {
@@ -491,7 +439,8 @@
                 const requestedPage = parseInt(hash.replace('#explore-', ''));
                 if (requestedPage >= 1 && requestedPage <= TOTAL_EXPLORE_PAGES) {
                     currentExplorePage = requestedPage;
-                    document.getElementById('explore-image').src = `page_${currentExplorePage}.jpg`;
+                    const exploreImg = document.getElementById('explore-image');
+                    if(exploreImg) exploreImg.src = `page_${currentExplorePage}.jpg`;
                 }
                 setView('explore', false);
             } else if (hash && hash !== '#') {
@@ -506,6 +455,7 @@
                 setView('home', false);
             }
         }
+
     </script>
 </body>
 </html>
