@@ -118,6 +118,26 @@
             z-index: 1;
         }
 
+        /* Home Sub-States (The Protocol) */
+        .home-sub-state {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+        .home-sub-state.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+     
         /* Action Buttons */
         .action-btn {
             background-color: rgba(10, 10, 10, 0.85);
@@ -233,9 +253,16 @@
         
         <!-- View 1: Download / Home -->
         <div id="view-home" class="view-state active">
-            <div id="home-bg" class="bg-layer" style="background-image: url('image_1.jpg');"></div>
-            <div id="home-ui" class="center-ui">
-                <button id="btn-download" class="action-btn">Execute Download Protocol</button>
+            <!-- Protocol State 1: Initiation -->
+            <div id="state-initiation" class="home-sub-state active" style="background-image: url('image_1.jpg');">
+                <div class="center-ui">
+                    <button id="btn-download" class="action-btn">Execute Download Protocol</button>
+                </div>
+            </div>
+
+            <!-- Protocol State 2: Completion -->
+            <div id="state-completion" class="home-sub-state" style="background-image: url('image_2.jpg');">
+                <!-- Visual confirmation handled by background image transition -->
             </div>
         </div>
 
@@ -297,10 +324,10 @@
                 }
             });
 
-            // Primary Download Button Logic
+          // State Transition Protocol Logic
             const downloadButton = document.getElementById('btn-download');
-            const homeUi = document.getElementById('home-ui');
-            const homeBg = document.getElementById('home-bg');
+            const stateInitiation = document.getElementById('state-initiation');
+            const stateCompletion = document.getElementById('state-completion');
 
             downloadButton.addEventListener('click', () => {
                 if(downloadInitiated) return; 
@@ -313,9 +340,9 @@
                 link.click();
                 document.body.removeChild(link);
 
-                // 2. State Transition (Image Swap & UI Removal)
-                homeBg.style.backgroundImage = "url('image_2.jpg')";
-                homeUi.style.display = 'none'; // Hides the main interaction container
+                // 2. Execute Background State Transition Protocol
+                stateInitiation.classList.remove('active');
+                stateCompletion.classList.add('active');
                 downloadInitiated = true;
             });
         });
