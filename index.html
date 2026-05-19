@@ -431,7 +431,8 @@
                     currentExplorePage = requestedPage;
                     document.getElementById('explore-image').src = `page_${currentExplorePage}.jpg`;
                 }
-                // --- View Routing ---
+        
+        // --- View Routing ---
         function setView(viewId, pushHistory = true) {
             document.querySelectorAll('.view-state').forEach(el => el.classList.remove('active'));
             document.getElementById('view-' + viewId).classList.add('active');
@@ -455,6 +456,55 @@
                 history.pushState({ view: viewId, page: currentExplorePage }, '', hash);
             }
         }
+
+        // --- Explore Logic & Preloading ---
+        function navigateExplore(direction) {
+            const newPage = currentExplorePage + direction;
+            if (newPage >= 1 && newPage <= TOTAL_EXPLORE_PAGES) {
+                currentExplorePage = newPage;
+                document.getElementById('explore-image').src = `page_${currentExplorePage}.jpg`;
+                updateExploreControls();
+                
+                history.pushState({ view: 'explore', page: currentExplorePage }, '', `#explore-${currentExplorePage}`);
+                preloadImage(currentExplorePage + direction);
+            }
+        }
+
+        function updateExploreControls() {
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            btnPrev.style.display = (currentExplorePage === 1) ? 'none' : 'inline-block';
+            btnNext.style.display = (currentExplorePage === TOTAL_EXPLORE_PAGES) ? 'none' : 'inline-block';
+        }
+
+        function preloadImage(pageNum) {
+            if (pageNum >= 1 && pageNum <= TOTAL_EXPLORE_PAGES) {
+                const img = new Image();
+                img.src = `page_${pageNum}.jpg`;
+            }
+        }
+
+        // --- URL State Manager ---
+        function handleUrlState() {
+            const hash = window.location.hash;
+            if (hash.startsWith('#explore-')) {
+                const requestedPage = parseInt(hash.replace('#explore-', ''));
+                if (requestedPage >= 1 && requestedPage <= TOTAL_EXPLORE_PAGES) {
+                    currentExplorePage = requestedPage;
+                    document.getElementById('explore-image').src = `page_${currentExplorePage}.jpg`;
+                }
+                setView('explore', false);
+            } else if (hash && hash !== '#') {
+                const validViews = ['home', 'explore', 'about', 'legal'];
+                const targetView = hash.replace('#', '');
+                if (validViews.includes(targetView)) {
+                    setView(targetView, false);
+                } else {
+                    setView('home', false);
+                }
+            } else {
+                setView('home', false);
+            }
         }
     </script>
 </body>
