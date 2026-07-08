@@ -45,7 +45,35 @@
             z-index: 1000;
             gap: 20px;
         }
+        
+/* --- NEW LOGO STYLES --- */
+        .nav-logo {
+            height: 30px;
+            width: auto;
+            margin-right: auto; /* Pushes the nav buttons to the right */
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
 
+        .nav-logo:hover {
+            opacity: 0.7;
+        }
+
+        /* Endorsement Seal */
+        .endorsement-seal {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .endorsement-seal-bg {
+            background-color: #ffffff;
+            display: inline-block;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
         .nav-btn {
             background: transparent;
             color: var(--text-primary);
@@ -214,6 +242,12 @@
                 padding: 10px;
                 gap: 10px;
             }
+
+                .nav-logo {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            
             #viewport { top: 90px; }
             .text-box { width: 85%; padding: 25px; min-width: unset; box-sizing: border-box; }
             #explore-container { flex-direction: column; justify-content: flex-start; padding-top: 20px; }
@@ -243,6 +277,8 @@
 
     <!-- Persistent Header -->
     <nav id="global-nav">
+        <!-- INJECTED WHITE LOGO -->
+        <img src="oc-logo-white.png" alt="Official Logo" class="nav-logo" onclick="setView('home')">
         <button class="nav-btn" onclick="setView('home')">Download</button>
         <button class="nav-btn" onclick="setView('explore')">Explore</button>
         <button class="nav-btn" onclick="setView('about')">About</button>
@@ -325,6 +361,17 @@
                 <strong>(NC) NonCommercial:</strong> Do not use the Archive for commercial purposes or financial gain.<br>
                 <strong>(ND) NoDerivatives:</strong> Do not distribute modified, remixed, or transformed versions; share the Archive without removing any of the pages.</p>
 
+                <!-- INJECTED BLACK LOGO SEAL -->
+                <div class="endorsement-seal">
+                    <p style="color: var(--text-primary); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">Official Endorsement Seal</p>
+                    <div class="endorsement-seal-bg">
+                        <img src="oc-logo-black.png" alt="Official Endorsement Logo" style="display: block; max-width: 100%; height: auto; max-height: 70px;">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+                
             </div>
         </div>
 
