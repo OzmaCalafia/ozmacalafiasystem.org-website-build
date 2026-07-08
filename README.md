@@ -13,7 +13,7 @@ The internet-anchor for THE_&#91;SYSTEM&#93;_ARCHIVE core text.
 git clone https://github.com
 cd ozmacalafiasystem.org-website-build
 ```
-Open `index.html` locally to render the application.
+Open `index.html` locally to render the interface.
 
 ## Visual Assets
 * `animated-sigil.svg` , `animated-sigil.gif` & `sigil-white-on-transparent.png` - &#91;SIGIL&#93; media.
