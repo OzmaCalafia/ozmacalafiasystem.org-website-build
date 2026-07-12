@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The[SYSTEM]Archive</title>
     <style>
-        /* System Resets & Root Variables */
+     
         :root {
             --bg-color: #0a0a0a;
             --ui-bg: rgba(10, 10, 10, 0.9);
@@ -29,7 +29,7 @@
             box-sizing: border-box;
         }
 
-        /* Global Navigation */
+     
         #global-nav {
             position: absolute;
             top: 0;
@@ -46,7 +46,7 @@
             gap: 20px;
         }
         
-/* --- NEW LOGO STYLES --- */
+
         .nav-logo {
             height: 44px;
             width: auto;
@@ -59,7 +59,7 @@
             opacity: 0.7;
         }
 
-      /* Endorsement Seal */
+     
         .endorsement-seal {
             text-align: center;
             margin-top: 30px;
@@ -88,7 +88,7 @@
 
         .nav-btn:hover { color: var(--accent); }
 
-        /* Global Footer */
+      
         #global-footer {
             position: absolute;
             bottom: 0;
@@ -114,7 +114,7 @@
 
         #global-footer a:hover { color: var(--accent); }
 
-        /* Viewport Container */
+        
         #viewport {
             position: absolute;
             top: var(--nav-height);
@@ -124,7 +124,7 @@
             overflow: hidden;
         }
 
-        /* View States */
+       
         .view-state {
             display: none;
             width: 100%;
@@ -133,7 +133,7 @@
         }
         .view-state.active { display: block; }
 
-        /* Background Layers */
+       
         .bg-layer {
             position: absolute;
             top: 0;
@@ -146,7 +146,7 @@
             z-index: 1;
         }
 
-        /* Home Sub-States (The Protocol) */
+       
         .home-sub-state {
             position: absolute;
             top: 0;
@@ -166,7 +166,7 @@
             pointer-events: auto;
         }
      
-        /* Action Buttons */
+      
         .action-btn {
             background-color: rgba(10, 10, 10, 0.85);
             color: var(--text-primary);
@@ -185,7 +185,7 @@
             color: var(--bg-color);
         }
 
-        /* Interface Formatting */
+      
         .center-ui {
             position: absolute;
             top: 50%;
@@ -198,7 +198,7 @@
             z-index: 10;
         }
 
-        /* Text Boxes (About, Legal) */
+       
         .text-box {
             position: absolute;
             top: 50%;
@@ -212,7 +212,7 @@
             min-width: 300px;
         }
 
-        /* Explore Sequence Styles */
+      
         #explore-container {
             width: 100%;
             height: 100%;
@@ -220,18 +220,36 @@
             justify-content: center;
             align-items: center;
             background-color: #050505;
+            position: relative;
+            box-sizing: border-box;
         }
         
         #explore-image {
-            max-height: 95%;
-            max-width: 90%;
+            max-height: 92%;
+            max-width: 80%;
             box-shadow: 0 0 30px rgba(0,0,0,0.8);
             z-index: 5;
+            object-fit: contain;
         }
 
-        .side-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); }
-        #btn-prev { left: 30px; }
-        #btn-next { right: 30px; }
+        #mobile-explore-controls {
+            display: contents;
+        }
+
+       
+        .side-nav-btn { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            z-index: 20;
+            padding: 12px 20px;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            background-color: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(4px);
+        }
+        #btn-prev { left: 15px; }
+        #btn-next { right: 15px; }
 
         /* --- Mobile Device Optimization --- */
         @media (max-width: 768px) {
@@ -243,32 +261,47 @@
                 gap: 10px;
             }
 
-                .nav-logo {
+            .nav-logo {
                 margin-right: 0;
                 margin-bottom: 5px;
             }
             
             #viewport { top: 90px; }
             .text-box { width: 85%; padding: 25px; min-width: unset; box-sizing: border-box; }
-            #explore-container { flex-direction: column; justify-content: flex-start; padding-top: 20px; }
-            #explore-image { max-height: 65vh; margin-bottom: 20px; }
+            
+            
+            #explore-container { 
+                flex-direction: column; 
+                justify-content: space-between; 
+                align-items: center;
+                padding: 15px 10px; 
+            }
+            
+            #explore-image { 
+                max-height: 72vh; 
+                max-width: 95%; 
+                margin-bottom: 10px; 
+            }
+            
             
             #mobile-explore-controls {
                 display: flex;
                 justify-content: center;
+                align-items: center;
+                gap: 15px;
                 width: 100%;
-                z-index: 10;
+                z-index: 20;
+                padding-bottom: 10px;
             }
+
             .side-nav-btn {
-                position: relative;
-                top: auto;
+                position: static;
                 transform: none;
-                left: auto;
-                right: auto;
-                display: inline-block;
-                margin: 0 10px;
-                padding: 10px 20px;
-                font-size: 14px;
+                flex: 1;
+                max-width: 140px;
+                text-align: center;
+                padding: 12px 10px;
+                font-size: 12px;
             }
         }
     </style>
@@ -338,7 +371,7 @@
         <div id="view-legal" class="view-state">
             <div class="text-box" style="width: 85%; max-width: 800px; max-height: 75vh; overflow-y: auto; text-align: left; font-size: 13px; line-height: 1.6;">
                
-                <!-- Static Image Title Integration -->
+                
                 <img src="sigil-white-on-transparent.png" alt="Legal Protocol Title" style="display: block; margin: 0 auto 30px auto; max-width: 100%; height: auto; max-height: 100px;">
                 
                 <p style="color: var(--text-muted);"><strong>COPYRIGHT NOTICE</strong><br>
@@ -360,7 +393,7 @@
                 <strong>(NC) NonCommercial:</strong> Do not use the Archive for commercial purposes or financial gain.<br>
                 <strong>(ND) NoDerivatives:</strong> Do not distribute modified, remixed, or transformed versions; share the Archive without removing any of the pages.</p>
 
-                <!-- BLACK LOGO SEAL -->
+                
                 <div class="endorsement-seal">
                     <img src="oc-logo-black.png" alt="[OC] Endorsement Logo" class="endorsement-logo">
                 </div>
