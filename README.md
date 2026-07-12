@@ -13,7 +13,7 @@ The internet-anchor for THE_&#91;SYSTEM&#93;_ARCHIVE core text.
 
 **Step 1: Clone the repository**
 ```bash
-git clone [https://github.com/OzmaCalafia/ozmacalafiasystem.org-website-build.git](https://github.com/OzmaCalafia/ozmacalafiasystem.org-website-build.git)
+git clone https://github.com/OzmaCalafia/ozmacalafiasystem.org-website-build.git
 ```
 
 **Step 2: Enter the directory**
