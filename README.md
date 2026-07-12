@@ -11,7 +11,7 @@ The internet-anchor for THE_&#91;SYSTEM&#93;_ARCHIVE core text.
 
 ## Getting Started
 ```bash
-git clone [https://github.com/OzmaCalafia/ozmacalafiasystem.org-website-build](https://github.com/OzmaCalafia/ozmacalafiasystem.org-website-build)
+git clone [https://github.com/OzmaCalafia/ozmacalafiasystem.org-website-build](https://github.com/OzmaCalafia/ozmacalafiasystem.org-website-build.git)
 cd ozmacalafiasystem.org-website-build
 ```
 
