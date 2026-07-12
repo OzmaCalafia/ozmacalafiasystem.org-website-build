@@ -501,8 +501,12 @@
         function updateExploreControls() {
             const btnPrev = document.getElementById('btn-prev');
             const btnNext = document.getElementById('btn-next');
-            if (btnPrev) btnPrev.style.display = (currentExplorePage === 1) ? 'hidden' : 'visible';
-            if (btnNext) btnNext.style.display = (currentExplorePage === TOTAL_EXPLORE_PAGES) ? 'hidden' : 'visible';
+
+            if (btnPrev) btnPrev.style.visibility = '';
+            if (btnNext) btnNext.style.visibility = '';
+            
+            if (btnPrev) btnPrev.style.display = (currentExplorePage === 1) ? 'none' : '';
+            if (btnNext) btnNext.style.display = (currentExplorePage === TOTAL_EXPLORE_PAGES) ? 'none' : '';
         }
 
         function preloadImage(pageNum) {
