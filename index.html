@@ -543,7 +543,7 @@
                 }
                 setView('explore', false);
             } else if (hash && hash !== '#') {
-                const validViews = ['home', 'explore', 'about', 'legal'];
+                const validViews = ['home', 'downloads', 'explore', 'about', 'legal'];
                 const targetView = hash.replace('#', '');
                 if (validViews.includes(targetView)) {
                     setView(targetView, false);
