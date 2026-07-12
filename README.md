@@ -11,10 +11,22 @@ The internet-anchor for THE_&#91;SYSTEM&#93;_ARCHIVE core text.
 
 ## Getting Started
 ```bash
-git clone https://github.com
+git clone [https://github.com/OzmaCalafia/ozmacalafiasystem.org-website-build](https://github.com/OzmaCalafia/ozmacalafiasystem.org-website-build)
 cd ozmacalafiasystem.org-website-build
 ```
-Open `index.html` locally to render the interface.
+
+### Execution Protocol
+
+**method a: local file**
+Open `index.html` directly in any web browser to render the interface.
+
+**method b: local server (developer testing)**
+Execute a temporary local server to simulate live network hosting:
+
+```bash
+python3 -m http.server 8000
+```
+Then navigate to `http://localhost:8000` in your web browser.
 
 ## Visual Assets
 * `animated-sigil.svg` , `animated-sigil.gif` & `sigil-white-on-transparent.png` - &#91;SIGIL&#93; media.
