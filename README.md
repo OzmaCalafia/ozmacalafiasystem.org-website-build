@@ -4,7 +4,8 @@ The internet-anchor for THE_&#91;SYSTEM&#93;_ARCHIVE core text.
 
 ## Repository Composition
 * `index.html` - Root interface.
-* `THE_[SYSTEM]_ARCHIVE.V1.A4.PORTRAIT.pdf` - Core text payload.
+* `THE_[SYSTEM]_ARCHIVE.V1.A4.PORTRAIT.pdf` - Core text payload (standard portrait format).
+* `THE_[SYSTEM]_ARCHIVE.V1.A4.BOOKLET.pdf` - Core text payload (foldable booklet format).
 * `page_1.jpg` through `page_27.jpg` - Document page images.
 * `a4-front-cover.jpg` & `a4-back-cover.jpg` - Cover art.
 
