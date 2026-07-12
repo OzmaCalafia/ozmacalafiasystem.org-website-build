@@ -47,5 +47,5 @@ Press `Ctrl + C` in your terminal to shut down the server and free up the port.
 
 
 ## Visual Assets
-* `animated-sigil.svg` , `animated-sigil.gif` , `sigil-white-on-transparent.png` & `favicon.ico` - &#91;SIGIL&#93; media.
+* `animated-sigil.svg` , `sigil-white-on-transparent.png` & `favicon.ico` - &#91;SIGIL&#93; media.
 * `oc-logo-black.png` & `oc-logo-white.png` - Ozma Calafia---&#91;OC&#93;---brand signatures.
