@@ -555,12 +555,18 @@
         function updateExploreControls() {
             const btnPrev = document.getElementById('btn-prev');
             const btnNext = document.getElementById('btn-next');
+            const controlsContainer = document.getElementById('mobile-explore-controls');
 
-            if (btnPrev) btnPrev.style.visibility = '';
-            if (btnNext) btnNext.style.visibility = '';
-            
             if (btnPrev) btnPrev.style.display = (currentExplorePage === 1) ? 'none' : '';
             if (btnNext) btnNext.style.display = (currentExplorePage === TOTAL_EXPLORE_PAGES) ? 'none' : '';
+            
+            if (controlsContainer) {
+                if (currentExplorePage === 1 || currentExplorePage === TOTAL_EXPLORE_PAGES) {
+                    controlsContainer.style.justifyContent = 'center';
+                } else {
+                    controlsContainer.style.justifyContent = 'space-between'; 
+                }
+            }
         }
 
         function preloadImage(pageNum) {
