@@ -307,21 +307,25 @@
             }
             
             #explore-image { 
-                max-height: 72vh; 
-                max-width: 95%; 
-                margin-bottom: 10px; 
-            }
-            
-            
-            #mobile-explore-controls {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 15px;
-                width: 100%;
-                z-index: 20;
-                padding-bottom: 10px;
-            }
+    flex: 1;
+    min-height: 0;
+    max-height: 100%; 
+    max-width: 95%; 
+    margin-bottom: 15px; 
+}
+
+#mobile-explore-controls {
+    position: relative; 
+    pointer-events: auto;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    z-index: 20;
+    padding-bottom: 10px;
+}
 
             .side-nav-btn {
                 position: static;
