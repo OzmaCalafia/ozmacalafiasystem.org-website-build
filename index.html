@@ -304,50 +304,25 @@
             }
             
             #viewport { top: 90px; }
-            .text-box { width: 85%; padding: 25px; min-width: unset; box-sizing: border-box; }
-            
-            
-            #explore-container { 
-                /* Removed flex-direction: column to bypass the Safari height bug */
-                display: flex; 
-                justify-content: center; 
-                align-items: center;
-                padding: 10px; 
+            .text-box { width: 85%; padding: 25px; min-width: unset; box-sizing: border-box; 
             }
-            
+
             #explore-image {
-                max-width: 95%; 
-                max-height: calc(100% - 80px); 
+                max-height: calc(100% - 70px);
                 margin-bottom: 20px;
-                object-fit: contain;
             }
 
             #mobile-explore-controls {
-                position: absolute;
-                top: auto; 
-                bottom: 20px;
-                left: 0;
-                width: 100%;
-                height: auto;
-                display: flex;
-                justify-content: space-between; 
-                align-items: center;
-                gap: 15px;
-                padding: 0 20px;
-                box-sizing: border-box;
-                z-index: 20;
-                pointer-events: auto;
+                bottom: 20px; 
+                padding: 0 20px; 
             }
 
             .side-nav-btn {
-                position: static; 
-                transform: none;
-                flex: 0 1 auto;
-                min-width: 120px;
-                text-align: center;
+                width: 120px; 
                 padding: 12px 10px;
                 font-size: 12px;
             }
+            
         }
     </style>
 </head>
